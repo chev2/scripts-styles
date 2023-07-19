@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Twitter to Nitter Redirect
+// @name         Redirect: Twitter to Nitter
 // @author       Chev
 // @version      1.0.0
 // @description  Redirects from Twitter to Nitter, a Twitter alternative front-end.
