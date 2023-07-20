@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Redirect: Twitter to Nitter
-// @author       Chev
+// @author       Chev <riskyrains@proton.me> (https://github.com/chev2)
 // @version      1.0.1
 // @description  Redirects from Twitter to Nitter, a Twitter alternative front-end.
 // @namespace    github.com/chev2
