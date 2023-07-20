@@ -1,0 +1,218 @@
+/* ==UserStyle==
+@name           Invidious Dark-Blue
+@author         Chev <riskyrains@proton.me> (https://github.com/chev2)
+@version        1.0.0
+@description    Dark-blue theme for Invidious. NOTE: This CSS theme was made specifically for inv.tux.pizza--YMMV on other instances!
+@namespace      github.com/chev2
+@license        Apache-2.0
+
+@homepageURL    https://github.com/chev2/scripts-styles
+@supportURL     https://github.com/chev2/scripts-styles/issues
+@updateURL      https://raw.githubusercontent.com/chev2/scripts-styles/main/styles/invidious-dark-blue.user.css
+
+@preprocessor   stylus
+
+@var    range       video-player-height     "Video player height"           [70, 5, 100, 5, "vh"]
+@var    range       main-side-padding       "Side padding"                  [10, 1, 20, 1, "vw"]
+@var    checkbox    move-side-bar           "Move next-video sidebar up"    1
+==/UserStyle== */
+
+@-moz-document domain("yewtu.be"), domain("vid.puffyan.us"), domain("yt.artemislena.eu"), domain("invidious.flokinet.to"), domain("invidious.projectsegfau.lt"), domain("inv.bp.projectsegfau.lt"), domain("invidious.tiekoetter.com"), domain("invidious.slipfox.xyz"), domain("inv.pistasjis.net"), domain("invidious.privacydev.net"), domain("vid.priv.au"), domain("iv.melmac.space"), domain("iv.ggtyler.dev"), domain("invidious.lunar.icu"), domain("invidious.0011.lt"), domain("inv.zzls.xyz"), domain("inv.tux.pizza"), domain("invidious.protokolla.fi"), domain("onion.tube"), domain("inv.in.projectsegfau.lt") {
+    /* Adjust side padding */
+    body > div.pure-g > .pure-u-md-2-24 {
+        display: none;
+    }
+    .pure-u-md-20-24, .pure-u-md-5-6 {
+        width: 100%;
+        padding: 4px 4px;
+    }
+    #contents {
+        justify-content: center;
+        padding: 0px main-side-padding;
+    }
+
+
+    /* Shorten website header */
+    .h-box > h3 {
+        margin: 0px;
+    }
+
+
+    /* Adjust main player */
+    /* Adjustments to player sizing & positioning--the default is really weird, so let's fix that */
+    #player-container {
+        padding: 8px;
+        
+        margin-left: 0px;
+        margin-right: 0px;
+        
+        height: auto;
+    }
+    #player {
+        height: auto;
+    }
+    .player-dimensions.vjs-fluid {
+        padding-top: 0px;
+    }
+    .video-js .vjs-tech {
+        position: static;
+        height: video-player-height;
+    }
+    /* Override player height to 100vh when in fullscreen */
+    #player:fullscreen > #player_html5_api {
+        height: 100vh;
+    }
+
+
+    /* Adjust play button */
+    .video-js .vjs-big-play-button {
+        width: 2em;
+        height: 2em;
+        
+        position: absolute;
+        top: calc(50% - 1em);
+        left: calc(50% - 1em);
+        
+        border-radius: 50%;
+        background-color: rgba(5, 5, 5, 50%);
+    }
+    .video-js:hover .vjs-big-play-button {
+        background-color: rgba(5, 5, 5, 75%);
+    }
+    .video-js .vjs-big-play-button .vjs-icon-placeholder::before {
+        position: static;
+    }
+    .video-js button:hover {
+        color: inherit;
+    }
+
+    /* Adjustments to player color */
+    #player, .video-js .vjs-tech {
+        background-color: transparent;
+    }
+
+
+    /* Adjustments to player controls */
+    #player .vjs-control-bar {
+        width: auto;
+        margin: 4px;
+
+        border-radius: 8px;
+
+        background-color: rgba(5, 5, 5, 0.75);
+    }
+
+
+    /* Adjust search bar BG color */
+    .dark-theme .searchbar input {
+        background-color: rgba(40, 40, 40, 30%);
+    }
+
+
+    /* Adjust search bar borders */
+    .searchbar input[type="search"] {
+        margin: auto;
+
+        border-radius: 7px;
+        
+        border: none;
+        background-color: hsla(240, 14%, 14%, .5);
+    }
+    .searchbar input[type="search"]:focus {
+        border: none;
+        background-color: hsla(240, 14%, 19%, .5);
+    }
+
+
+    /* Generic box entry modifications */
+    .h-box {
+        /* background: rgba(0, 0, 0, 50%); */
+        background: rgb(6, 8, 11);
+        border-radius: 8px;
+        
+        padding: 8px;
+        margin: 4px 4px;
+    }
+
+
+    /* Main background color */
+    body.dark-theme {
+        background-color: rgb(13, 17, 23);
+    }
+
+
+    /* Link colors */
+    .dark-theme a {
+        color: rgb(133, 182, 255);
+    }
+
+
+    /* Thumbnails have a maximum height */
+    img.thumbnail {
+        max-height: 240px;
+    }
+
+
+    /* Modify thumbnail "watched" overlays */
+    div.watched-overlay {
+        background-color: rgba(255, 255, 255, 25%);
+
+        bottom: 4px;
+
+        text-align: center;
+        text-shadow: 1px 1px 3px black;
+        font-size: 24px;
+        font-weight: 500;
+        color: white;
+    }
+    div.watched-overlay::after {
+        content: "WATCHED";
+    }
+    div.watched-indicator {
+        background-color: rgb(75, 75, 255);
+    }
+
+
+    /* Comment profile pictures */
+    div.channel-profile > img {
+        width: 48px !important;
+    }
+
+
+    /* Comment entries have more apparent spacing */
+    #comments {
+        max-width: 95%;
+    }
+    #comments > div:nth-child(2) > div {
+        background: rgba(30, 30, 40, 50%);
+        border-radius: 8px;
+        
+        width: auto !important;
+        
+        padding: 0px 16px;
+        margin-bottom: 8px;
+    }
+
+
+    /* Adjust related videos right-side panel */
+    /* This one's a bit hacky, unfortunately */
+    if move-side-bar {
+        div.pure-g > div.pure-u-lg-1-5:last-child {
+            position: absolute;
+            right: main-side-padding;
+            top: 70px;
+        }
+        /* Adjust main player margin */
+        #player-container {
+            margin-right: calc(20vw + 4px);
+        }
+        /* Adjust video creator & description/comments */
+        div.pure-u-1.pure-u-lg-3-5 > * {
+            margin-right: 2.9vw;
+        }
+        /* Adjust title */
+        div.h-box:nth-child(5) > h1 {
+            margin: 0px;
+        }
+    }
+}
