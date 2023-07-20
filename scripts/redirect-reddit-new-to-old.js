@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Redirect: New Reddit to Old Reddit
 // @author       Chev <riskyrains@proton.me> (https://github.com/chev2)
-// @version      1.0.0
+// @version      1.0.1
 // @description  Redirects from new Reddit to old Reddit.
 // @namespace    github.com/chev2
 // @license      Apache-2.0
@@ -21,5 +21,5 @@
 (function() {
     'use strict';
 
-    location.replace(location.href.replace("www.reddit.com/", "old.reddit.com/"));
+    location.hostname = "old.reddit.com";
 })();

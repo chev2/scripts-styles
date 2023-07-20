@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Redirect: Twitter to Nitter
 // @author       Chev <riskyrains@proton.me> (https://github.com/chev2)
-// @version      1.0.2
+// @version      1.0.3
 // @description  Redirects from Twitter to Nitter, a Twitter alternative front-end.
 // @namespace    github.com/chev2
 // @license      Apache-2.0
@@ -23,5 +23,5 @@
 
     // Put your instance domain here
     const INSTANCE_DOMAIN = "nitter.nl"
-    location.replace(location.href.replace("twitter.com/", `${INSTANCE_DOMAIN}/`));
+    location.hostname = INSTANCE_DOMAIN;
 })();
