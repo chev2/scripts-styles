@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Invidious Dark-Blue
 @author         Chev <riskyrains@proton.me> (https://github.com/chev2)
-@version        1.0.0
+@version        1.1.0
 @description    Dark-blue theme for Invidious. NOTE: This CSS theme was made specifically for inv.tux.pizza--YMMV on other instances!
 @namespace      github.com/chev2
 @license        Apache-2.0
@@ -15,6 +15,7 @@
 @var    range       video-player-height     "Video player height"           [70, 5, 100, 5, "vh"]
 @var    range       main-side-padding       "Side padding"                  [10, 1, 20, 1, "vw"]
 @var    checkbox    move-side-bar           "Move next-video sidebar up"    1
+@var    checkbox    hide-thumbnails         "Hide thumbnails"               0
 ==/UserStyle== */
 
 @-moz-document domain("yewtu.be"), domain("vid.puffyan.us"), domain("yt.artemislena.eu"), domain("invidious.flokinet.to"), domain("invidious.projectsegfau.lt"), domain("inv.bp.projectsegfau.lt"), domain("invidious.tiekoetter.com"), domain("invidious.slipfox.xyz"), domain("inv.pistasjis.net"), domain("invidious.privacydev.net"), domain("vid.priv.au"), domain("iv.melmac.space"), domain("iv.ggtyler.dev"), domain("invidious.lunar.icu"), domain("invidious.0011.lt"), domain("inv.zzls.xyz"), domain("inv.tux.pizza"), domain("invidious.protokolla.fi"), domain("onion.tube"), domain("inv.in.projectsegfau.lt") {
@@ -29,6 +30,13 @@
     #contents {
         justify-content: center;
         padding: 0px main-side-padding;
+    }
+
+
+    /* Adjust horizontal rule style */
+    hr {
+        margin: 2px 0;
+        color: rgba(255, 255, 255, 70%);
     }
 
 
@@ -86,7 +94,8 @@
         color: inherit;
     }
 
-    /* Adjustments to player color */
+
+    /* Adjustments to player background color */
     #player, .video-js .vjs-tech {
         background-color: transparent;
     }
@@ -100,6 +109,10 @@
         border-radius: 8px;
 
         background-color: rgba(5, 5, 5, 0.75);
+    }
+    /* Speed up player controls show/hide animation */
+    .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+        transition: visibility 0.4s, opacity 0.4s;
     }
 
 
@@ -194,6 +207,12 @@
     }
 
 
+    /* Modify channel banner image */
+    div.h-box:nth-child(3) > img:nth-child(1) {
+        border-radius: 8px;
+    }
+
+
     /* Adjust related videos right-side panel */
     /* This one's a bit hacky, unfortunately */
     if move-side-bar {
@@ -208,11 +227,24 @@
         }
         /* Adjust video creator & description/comments */
         div.pure-u-1.pure-u-lg-3-5 > * {
-            margin-right: 2.9vw;
+            margin-right: 4.2vw;
         }
         /* Adjust title */
         div.h-box:nth-child(5) > h1 {
             margin: 0px;
+        }
+    }
+
+
+    /* Hide thumbnails if the user asks for it */
+    if hide-thumbnails {
+        div.thumbnail {
+            display: none;
+        }
+
+        /* Offset margin of first text child */
+        div.pure-u-1:nth-child(5) > div:nth-child(1) > div:nth-child(2) {
+            margin-top: -12px;
         }
     }
 }
