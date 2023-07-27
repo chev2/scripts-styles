@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Invidious Dark-Blue
 @author         Chev <riskyrains@proton.me> (https://github.com/chev2)
-@version        1.1.0
+@version        1.1.1
 @description    Dark-blue theme for Invidious. NOTE: This CSS theme was made specifically for inv.tux.pizza--YMMV on other instances!
 @namespace      github.com/chev2
 @license        Apache-2.0
@@ -225,9 +225,17 @@
         #player-container {
             margin-right: calc(20vw + 4px);
         }
+        /* Adjust main contents below player margin */
+        #contents > div.pure-g:nth-child(6) {
+            margin-right: 20vw;
+        }
+        /* Adjust video creator & description/comments container */
+        div.pure-u-lg-3-5 {
+            width: 80%;
+        }
         /* Adjust video creator & description/comments */
         div.pure-u-1.pure-u-lg-3-5 > * {
-            margin-right: 4.2vw;
+            margin-right: 4px;
         }
         /* Adjust title */
         div.h-box:nth-child(5) > h1 {
