@@ -1,0 +1,75 @@
+/* ==UserStyle==
+@name           Nitter Split View
+@author         Chev <riskyrains@proton.me> (https://github.com/chev2)
+@version        1.0.0
+@description    On Nitter, splits the main tweet and replies to be side-by-side.
+@namespace      github.com/chev2
+@license        Apache-2.0
+
+@homepageURL    https://github.com/chev2/scripts-styles
+@supportURL     https://github.com/chev2/scripts-styles/issues
+@updateURL      https://raw.githubusercontent.com/chev2/scripts-styles/main/styles/nitter-split-view.user.css
+
+@preprocessor   stylus
+
+@var    range       side-padding       "Side padding"                  [152, 0, 300, 1, "px"]
+@var    range       roundness          "Border radius"                 [8, 0, 24, 1, "px"]
+==/UserStyle== */
+
+top-bar-size = 50px
+top-bar-padding = 10px
+top-bar-offset = top-bar-size + top-bar-padding
+
+@-moz-document domain("nitter.net"), domain("nitter.unixfox.eu"), domain("nitter.mint.lgbt"), domain("nitter.esmailelbob.xyz"), domain("nitter.poast.org"), domain("nitter.cz"), domain("nitter.privacydev.net"), domain("nitter.projectsegfau.lt"), domain("nitter.eu.projectsegfau.lt"), domain("nitter.in.projectsegfau.lt"), domain("nitter.us.projectsegfau.lt"), domain("nitter.soopy.moe"), domain("nitter.rawbit.ninja"), domain("nitter.d420.de"), domain("bird.habedieeh.re"), domain("nitter.x86-64-unknown-linux-gnu.zip"), domain("nitter.woodland.cafe"), domain("nitter.dafriser.be"), domain("nitter.catsarch.com"), domain("nitter.perennialte.ch"), domain("nitter.salastil.com"), domain("n.populas.no"), domain("nt.ggtyler.dev"), domain("nitter.uni-sonia.com"), domain("n.opnxng.com"), domain("nitter.ktachibana.party"), domain("nitter.tinfoil-hat.net") {
+    .container {
+        padding-top: top-bar-offset;
+    }
+
+    .conversation {
+        max-width: 100%;
+    }
+
+    .main-thread {
+        float: left;
+
+        position: fixed;
+
+        right: calc(50vw);
+        left: side-padding;
+    }
+
+    .replies {
+        float: right;
+
+        position: fixed;
+
+        right: side-padding;
+        left: calc(50vw);
+
+        margin-left: 8px;
+    }
+
+    .main-thread, .replies {
+        border-radius: roundness;
+
+        /* Add scrollbar to both replies and main thread */
+        /* This is really only needed for main thread (since replies have a scrollbar by default) */
+        /* But we add scrollbars to both so the main container doesn't have to scroll, */
+        /* Keeping the navbar intact */
+        overflow-y: scroll;
+        max-height: "calc(100vh - 8px - %s)" % top-bar-offset;}
+
+    .reply, .tweet-link {
+        border-radius: roundness;
+    }
+
+    /* "Jump to top" button */
+    .top-ref {
+        display: none;
+    }
+
+    .main-tweet, .replies {
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+}
