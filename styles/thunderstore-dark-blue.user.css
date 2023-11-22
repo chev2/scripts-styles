@@ -1,0 +1,336 @@
+/* ==UserStyle==
+@name           Thunderstore Dark-Blue
+@author         Chev <riskyrains@proton.me> (https://github.com/chev2)
+@version        1.0.0
+@description    Dark-blue theme for Thunderstore, a modding platform for Unity games.
+@namespace      github.com/chev2
+@license        Apache-2.0
+
+@homepageURL    https://github.com/chev2/scripts-styles
+@supportURL     https://github.com/chev2/scripts-styles/issues
+@updateURL      https://raw.githubusercontent.com/chev2/scripts-styles/main/styles/thunderstore-dark-blue.user.css
+
+@preprocessor   stylus
+
+@var    checkbox    float-nav-bar         "Floating navigation bar"            1
+@var    checkbox    hide-game-bg          "Hide game background"               0
+@var    checkbox    tint-game-bg          "Tint game background"               1
+@var    range       game-bg-blur          "Game background blur"               [6, 0, 32, 1, "px"]
+@var    checkbox    hide-app-banner       "Hide Thunderstore App Banner"       0
+==/UserStyle== */
+
+@-moz-document domain("thunderstore.io") {  
+    :root {
+        --primary: hsl(216, 28%, 11%);
+        --light: hsl(216, 28%, 15%);
+        --lighter: hsl(216, 28%, 23%);
+        --lightest: hsl(216, 28%, 29%);
+        
+        --btn-success-color: hsl(216, 28%, 23%);
+        --btn-success-color-hover: hsl(216, 28%, 26%);
+        --btn-success-color-active: hsl(216, 28%, 32%);
+        --btn-outline-success-color: hsl(216, 28%, 45%);
+        
+        --dropdown-search-input-color: hsl(216, 28%, 36%);
+        
+        --checkbox-switch-active-color: hsl(216, 28%, 38%);
+        
+        --input-box-color: hsl(216, 28%, 23%);
+        
+        --dropdown-color: hsl(216, 28%, 20%);
+    }
+    
+    /* The body background usually isn't seen--typically only for games with no set custom background */
+    body {
+        background-color: var(--primary);
+    }
+
+    /* Make elements use global vars for theming */
+    .bg-primary {
+        background-color: var(--primary) !important;
+    }
+    
+    .bg-light {
+        background-color: var(--light) !important;
+    }
+
+    /* Footer background color */
+    .footer {
+        background-color: hsl(216, 28%, 10%);
+    }
+
+    /* Customization for game background */
+    if hide-game-bg {
+        /* Main background color */
+        .background .tint {
+            background-color: hsl(216, 28%, 7%);
+        }
+    }
+    
+    .background {
+        filter: s("blur(%s)", game-bg-blur);
+    }
+    
+    if tint-game-bg {
+        unless hide-game-bg {
+            .background {
+                filter: s("saturate(0) sepia(1) saturate(1) hue-rotate(180deg) brightness(1.2) blur(%s)", game-bg-blur);
+            }
+        }
+    }
+    
+    if float-nav-bar {
+        primary-header-height = 40px
+        secondary-header-height = 30px
+
+        /* Fixed nav bars */
+        .navbar {
+            position: fixed;
+            left: 0;
+            right :0;
+        }
+
+        nav.navbar.py-2 {
+            height: primary-header-height;
+
+            z-index: 3;
+        }
+
+        nav.navbar.py-1 {
+            margin-top: primary-header-height;
+
+            z-index: 2;
+        }
+
+        /* Offset main content by navbar */
+        .main {
+            padding-top: s("calc(%s + %s + 20px)", primary-header-height, secondary-header-height);
+        }
+        
+        /* Fix dropdown menu overflow */
+        .dropdown-menu {
+            overflow-y: scroll;
+            max-height: s("calc(100vh - %s - 8px)", primary-header-height);
+        }
+    }
+    
+    /* If the user wants to hide the 'Get the Thunderstore App' banner */
+    if hide-app-banner {
+        #get-app-alert {
+            display: none !important;
+        }
+        
+        /* Fix top margin for content container */
+        div.container > .mt-4, div.container > .mt-4 > .row > h3 {
+            margin-top: 0px !important;
+        }
+    }
+    
+    /* Mod grid */
+    /* Add corner rounding */
+    .package-list > div > div:first-child, .package-list > div > div:first-child img {
+        border-radius: 8px 8px 0px 0px;
+    }
+
+    .package-list > div > div:last-child { 
+        border-radius: 0px 0px 8px 8px;
+    }
+    
+    .pin > div {
+        border-radius: 8px;
+        
+        margin-top: 4px;
+        margin-left: 4px;
+    }
+    
+    /* Mod grid entry badges */
+    .badge-secondary {
+        background-color: var(--lighter);
+    }
+    
+    /* Drop-down menu */
+    .dropdown-menu {
+        background-color: var(--dropdown-color);
+        border: none;
+    }
+    
+    .communities-dropdown .section:not(:first-child) {
+        border: none;
+    }
+    
+    /* Search drop-down */
+    .ss-main {
+        color: white;
+    }
+
+    .ss-content {
+        border: 1px solid var(--lightest);
+        background-color: var(--lightest);
+    }
+    
+    .ss-content .ss-search input {
+        border: 1px solid var(--dropdown-search-input-color);
+        background-color: var(--dropdown-search-input-color);
+        
+        color: white;
+        caret-color: white;
+    }
+    
+    .ss-content .ss-list .ss-option.ss-disabled {
+        background-color: var(--lighter);
+    }
+    
+    /* Search drop-down multi-add icon */
+    .ss-main .ss-multi-selected .ss-add .ss-plus, .ss-main .ss-multi-selected .ss-add .ss-plus::after {
+        background: white;
+    }
+    
+    /* Input boxes */
+    .form-control {
+        background: var(--input-box-color);
+        
+        color: white;
+        caret-color: white;
+    }
+    
+    .form-control:focus {
+        background: var(--input-box-color);
+
+        color: inherit;
+    }
+    
+    .ss-main .ss-multi-selected {
+        background-color: var(--input-box-color);
+        border-color: var(--input-box-color);
+    }
+    
+    .slimselect-lg .ss-multi-selected .ss-disabled .ss-disabled, .slimselect-lg .ss-multi-selected .ss-values .ss-disabled, .slimselect-lg .ss-single-selected .ss-disabled .ss-disabled, .slimselect-lg .ss-single-selected .ss-values .ss-disabled {
+        color: white;
+    }
+    
+    /* Details page */
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .card-header, .breadcrumb {
+        background-color: var(--lighter);
+        border-color: var(--lighter);
+    }
+    
+    .nav-tabs {
+        border-bottom: 1px solid var(--lighter);
+    }
+    
+    .list-group-item {
+        background-color: var(--light);
+        border-color: var(--light);
+    }
+    
+    /* Tables */
+    .table td, .table th {
+        border-top: 1px solid var(--lighter);
+    }
+    
+    /* Button colors */
+    .btn-success {
+        border-color: var(--btn-success-color);
+        background-color: var(--btn-success-color);
+    }
+    
+    .btn-success:hover {
+        border-color: var(--btn-success-color-hover);
+        background-color: var(--btn-success-color-hover);
+    }
+    
+    .btn-secondary {
+        border-color: var(--btn-success-color);
+        background-color: var(--btn-success-color);
+    }
+    
+    .btn-secondary:hover {
+        border-color: var(--btn-success-color-hover);
+        background-color: var(--btn-success-color-hover);
+    }
+    
+    .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+        border-color: var(--btn-success-color-active);
+        background-color: var(--btn-success-color-active);
+    }
+    
+    /* Outlined buttons */
+    .btn-outline-success {
+        border-color: var(--btn-outline-success-color);
+        color: var(--btn-outline-success-color);
+    }
+    
+    .btn-outline-success:hover {
+        border-color: var(--btn-outline-success-color);
+        background-color: var(--btn-outline-success-color);
+    }
+    
+    /* Checkboxes/switches */
+    .custom-control-label::before {
+        background-color: var(--lighter);
+        border: 1px solid var(--lighter);
+    }
+
+    .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: var(--checkbox-switch-active-color);
+        border-color: var(--checkbox-switch-active-color);
+    }
+    
+    /* Link colors */
+    a, .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover, .markdown-body a {
+        color: hsl(221, 100%, 85%);
+    }
+    
+    a:hover {
+        color: hsl(221, 100%, 75%);
+    }
+    
+    /* Paginator */
+    .page-link {
+        background-color: var(--lighter);
+    }
+    
+    .page-link:hover {
+        background-color: var(--lightest);
+    }
+    
+    .page-item.disabled .page-link {
+        background-color: var(--light);
+    }
+    
+    .pagination {
+        padding-left: auto;
+        justify-content: center;
+    }
+}
+
+@-moz-document domain("blog.thunderstore.io") {
+    /* WARNING: With a lack of unique classnames/ids to work with, combined with use of inline styles, this gets really hacky! */
+    body > div > main > div > div, body > div > main > div > div  > section.bg-cover {
+        background-color: var(--light) !important;
+    }
+    
+    body > div > main > div > div > div:last-child > div > div > div > div > div:last-child > div a {
+        background-color: var(--lighter) !important;
+        border-color: var(--lighter) !important;
+    }
+    
+    /* Adjust existing theme colors */
+    .bg-wt-background {
+        background-color: var(--lighter);
+    }
+    
+    .bg-wt-tertiary {
+        background-color: var(--primary);
+    }
+    
+    /* Adjust links in blog posts */
+    a.link[style] {
+        color: hsl(221, 100%, 85%) !important;
+        text-decoration: underline currentcolor !important;
+    }
+    
+    a.link:hover[style] {
+        color: hsl(221, 100%, 75%) !important;
+    }
+}
