@@ -17,7 +17,7 @@ If done correctly, you should get a prompt from Stylus asking if you'd like to i
 
 ## Installing Scripts
 
-First, install a browser extension that handles userscripts. I recommend [Tampermonkey](https://www.tampermonkey.net/).
+First, install a browser extension that handles userscripts. I recommend [Violentmonkey](https://violentmonkey.github.io/).
 
 ### Option 1: Install via GitHub
 Right now, I only officially host my userscripts on GitHub.
